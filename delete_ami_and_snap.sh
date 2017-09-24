@@ -5,7 +5,7 @@
 #description     :This script search for AMIs and their respective snapshots, list them and you can deregister and delete the snapshots automatically.
 #author          :Lucas Oshiro | lucas.oshiro@hotmail.com | [https://goo.gl/oNNt2S]
 #date            :20170924
-#version         :2.1
+#version         :2.2
 #usage           :bash delete_images.sh <parameter>
 #notes           :AWS-CLI is needed to use this script.
 #===============================================================================#
@@ -26,7 +26,7 @@ cat /tmp/output_describe.txt | grep 'SnapshotId' | awk -F : '{ print $2 }' | sed
 echo -e "Images and snapshots found:\n\nImages:\n`cat /tmp/images.txt`\n\n Snapshots:\n`cat /tmp/snap.txt` \n"
 
 #Conditional to proceed
-read -p "Proceed? " -r
+read -p "Do you want to continue? [y/n] " -r
 
 echo
 if [[ ! $REPLY =~ ^[Yy]$ ]]
@@ -48,4 +48,4 @@ for snap in `cat /tmp/snap.txt`
 do aws ec2 delete-snapshot --snapshot-id $snap ;
 done
 
-echo -e "\n\n\nImages and snapshots successfully removed of your account!"
+echo -e "\n\nImages and snapshots successfully removed of your account!"
