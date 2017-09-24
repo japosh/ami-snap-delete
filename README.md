@@ -13,7 +13,7 @@ It's really simple, you just have to execute script with `bash` command, as show
 
 ``` bash delete_images.sh image-example-* ```
 
-This will search for any AMI name who starts with **image-example-**.
+This will search for any AMI name who starts with `image-example-`.
 
 The output of command is expected to be like this:
 
@@ -50,4 +50,5 @@ snap-03b90d9a520dfb94d
 Images and snapshots successfully removed from your account!
 ```
 
-And you are done! The AMIs are deregistered and their respective snapshots deleted from your account!
+
+**And you are done! The AMIs are deregistered and their respective snapshots deleted from your account!**
