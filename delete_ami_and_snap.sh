@@ -3,9 +3,9 @@
 #===============================================================================#
 #title           :delete_images.sh
 #description     :This script search for AMIs and their respective snapshots, list them and you can deregister and delete the snapshots automatically.
-#author          :Lucas Oshiro
-#date            :20170923
-#version         :2.0    
+#author          :Lucas Oshiro | lucas.oshiro@hotmail.com | [https://goo.gl/oNNt2S]
+#date            :20170924
+#version         :2.1
 #usage           :bash delete_images.sh <parameter>
 #notes           :AWS-CLI is needed to use this script.
 #===============================================================================#
