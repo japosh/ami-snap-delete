@@ -1,18 +1,19 @@
-# ami-snap-delete
-A simple shell script to full delete AMIs (deregister AMIs and delete associated snapshots).
+# Remotion of AMI and Snapshot
+When you deregister a AMI in your AWS account, snapshots attached on this AMI are not deleted together, you have to delete them separately, making this proccess slow and annoying.
+In most of times, you want to completely remove AMI from your account. for this, i developed this shell script to make things easier and faster to do.
 
 ## Usage
-This script is really simple. You just have to execute in `bash` using command as follows:
+It's really simple, you just have to execute script with `bash` command, as showing below:
 
-``` bash delete_images.sh <parameter> ```
+``` bash delete_images.sh <Parameter> ```
 
-**Parameter** is used to search for AMIs. You can pass a full AMI name or pass just a part of it.
+**Parameter** is used to search the AMIs. You can pass a full AMI name or pass just a part.
 
 ## Example
 
 ``` bash delete_images.sh image-example-* ```
 
-This will search for any AMI who starts with **image-example-**.
+This will search for any AMI name who starts with **image-example-**.
 
 The output of command is expected to be like this:
 
@@ -31,7 +32,8 @@ Snapshots:
 Do you want to continue? [y/n]:
 ```
 
-At this point, if you confirm the information about items to be deleted, answer `y` to proceed or `n` to abort operation. Typing `y` will return this:
+At this point, you have to confirm the information about items to be deleted. Answer `y` to proceed or `n` to abort operation.
+Typing `y` will return this:
 
 ```
 Starting the Deregister of AMIs...   
@@ -45,5 +47,7 @@ snap-047cd55d060c608db
 snap-03b90d9a520dfb94d
 
 
-
 Images and snapshots successfully removed from your account!
+```
+
+And you are done! The AMIs are deregistered and their respective snapshots deleted from your account!
