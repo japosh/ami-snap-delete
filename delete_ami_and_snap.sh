@@ -26,7 +26,7 @@ cat /tmp/output_describe.txt | grep 'SnapshotId' | awk -F : '{ print $2 }' | sed
 cat /tmp/output_describe.txt | grep 'ImageId' | awk -F : '{ print $2 }' | sed 's/"//g;s/,//g' > /tmp/image-ids.txt
 
 #Print on screen the results of search
-echo -e "Images and snapshots found:\n\nImages:\n`cat /tmp/images.txt`\n\n Snapshots:\n`cat /tmp/snaps.txt` \n"
+echo -e "Images and snapshots found:\n\nImages:\n`cat /tmp/image-names.txt`\n\n Snapshots:\n`cat /tmp/snaps.txt` \n"
 
 #Conditional to proceed
 read -p "Do you want to continue? [y/n] " -r
