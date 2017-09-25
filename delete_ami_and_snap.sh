@@ -12,9 +12,9 @@
 
 
 #Take input of AMI name to be deleted (full-name or term to match [ex. image_2017-*]
-echo -e "$1" > /tmp/image-name.txt
+echo -e "$1" > /tmp/image-names.txt
 
-aws ec2 describe-images --filters Name=name,Values=`cat /tmp/image-name.txt` > /tmp/output_describe.txt
+aws ec2 describe-images --filters Name=name,Values=`cat /tmp/image-names.txt` > /tmp/output_describe.txt
 
 #Find images matching with the parameter passed
 cat /tmp/output_describe.txt | grep '"Name' | awk -F : '{ print $2 }' | sed 's/"//g' > /tmp/image-names.txt
@@ -26,7 +26,7 @@ cat /tmp/output_describe.txt | grep 'SnapshotId' | awk -F : '{ print $2 }' | sed
 cat /tmp/output_describe.txt | grep 'ImageId' | awk -F : '{ print $2 }' | sed 's/"//g;s/,//g' > /tmp/image-ids.txt
 
 #Print on screen the results of search
-echo -e "Images and snapshots found:\n\nImages:\n`cat /tmp/images.txt`\n\n Snapshots:\n`cat /tmp/snap.txt` \n"
+echo -e "Images and snapshots found:\n\nImages:\n`cat /tmp/images.txt`\n\n Snapshots:\n`cat /tmp/snaps.txt` \n"
 
 #Conditional to proceed
 read -p "Do you want to continue? [y/n] " -r
@@ -52,3 +52,5 @@ do aws ec2 delete-snapshot --snapshot-id $snap ;
 done
 
 echo -e "\n\nImages and snapshots successfully removed of your account!"
+
+rm -f /tmp/output_describe.txt /tmp/image-names.txt /tmp/snaps.txt /tmp/image-ids.txt
