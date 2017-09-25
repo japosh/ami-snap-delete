@@ -16,11 +16,14 @@ echo -e "$1" > /tmp/image-name.txt
 
 aws ec2 describe-images --filters Name=name,Values=`cat /tmp/image-name.txt` > /tmp/output_describe.txt
 
-#Find image(s) matching with the parameter passed
-cat /tmp/output_describe.txt | grep '"Name' | awk -F : '{ print $2 }' | sed 's/"//g' > /tmp/images.txt
+#Find images matching with the parameter passed
+cat /tmp/output_describe.txt | grep '"Name' | awk -F : '{ print $2 }' | sed 's/"//g' > /tmp/image-names.txt
 
-#Find snapshot(s) associated based on the match images
-cat /tmp/output_describe.txt | grep 'SnapshotId' | awk -F : '{ print $2 }' | sed 's/"//g' > /tmp/snap.txt
+#Find snapshots associated based on the match images
+cat /tmp/output_describe.txt | grep 'SnapshotId' | awk -F : '{ print $2 }' | sed 's/"//g' > /tmp/snaps.txt
+
+#Filter and save AMI's IDs to be deleted
+cat /tmp/output_describe.txt | grep 'ImageId' | awk -F : '{ print $2 }' | sed 's/"//g;s/,//g' > /tmp/image-ids.txt
 
 #Print on screen the results of search
 echo -e "Images and snapshots found:\n\nImages:\n`cat /tmp/images.txt`\n\n Snapshots:\n`cat /tmp/snap.txt` \n"
@@ -37,14 +40,14 @@ fi
 #Start the deregister of AMIs
 echo -e "Deregistering the AMIs... \n"
 
-for image in `cat /tmp/images.txt`
-do aws ec2 deregister-image --image-id $image ;
+for id in `cat /tmp/image-ids.txt`
+do aws ec2 deregister-image --image-id $id ;
 done
 
 #Delete the associated snapshots
 echo -e "\nDeleting associated snapshots.... \n"
 
-for snap in `cat /tmp/snap.txt`
+for snap in `cat /tmp/snaps.txt`
 do aws ec2 delete-snapshot --snapshot-id $snap ;
 done
 
