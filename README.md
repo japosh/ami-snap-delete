@@ -7,7 +7,7 @@ It's really simple, you just have to execute script with `bash` command, as show
 
 ``` bash delete_images.sh <Parameter> ```
 
-**Parameter** is used to search the AMIs. You can pass a full AMI name or pass just a part.
+**Parameter** is used to search the AMIs. You can pass the whole AMI name or pass just a part of it.
 
 ## Example
 
