@@ -5,20 +5,20 @@ In most of times, you want to completely remove AMI from your account. for this,
 ## Usage
 It's really simple, you just have to execute script with `bash` command, as showing below:
 
-``` bash delete_images.sh <Parameter> ```
+``` bash delete_ami_and_snap.sh <Parameter> ```
 
 **Parameter** is used to search the AMIs. You can pass the whole AMI name or pass just a part of it.
 
 ## Example
 
-``` bash delete_images.sh image-example-* ```
+``` bash delete_ami_and_snap.sh image-example-* ```
 
 This will search for any AMI name who starts with `image-example-`.
 
 The output of command is expected to be like this:
 
 ```
-$ bash delete_images.sh image-example-*
+$ bash delete_ami_and_snap.sh image-example-*
 Following are the images and snapshots found:
 
 Images:
