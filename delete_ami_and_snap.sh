@@ -20,7 +20,7 @@ aws ec2 describe-images --filters Name=name,Values=`cat /tmp/image-names.txt` > 
 cat /tmp/output_describe.txt | grep '"Name' | awk -F : '{ print $2 }' | sed 's/"//g' > /tmp/image-names.txt
 
 #Find snapshots associated based on the match images
-cat /tmp/output_describe.txt | grep 'SnapshotId' | awk -F : '{ print $2 }' | sed 's/"//g' > /tmp/snaps.txt
+cat /tmp/output_describe.txt | grep 'SnapshotId' | awk -F : '{ print $2 }' | sed 's/"//g;s/,//g' > /tmp/snaps.txt
 
 #Filter and save AMI's IDs to be deleted
 cat /tmp/output_describe.txt | grep 'ImageId' | awk -F : '{ print $2 }' | sed 's/"//g;s/,//g' > /tmp/image-ids.txt
