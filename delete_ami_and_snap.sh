@@ -14,7 +14,7 @@
 #Take input of AMI name to be deleted (full-name or term to match [ex. image_2017-*]
 echo -e "$1" > /tmp/image-names.txt
 
-aws ec2 describe-images --filters Name=name,Values=`cat /tmp/image-names.txt` > /tmp/output_describe.txt
+aws ec2 describe-images --owners self --filters Name=name,Values=`cat /tmp/image-names.txt` > /tmp/output_describe.txt
 
 #Find images matching with the parameter passed
 cat /tmp/output_describe.txt | grep '"Name' | awk -F : '{ print $2 }' | sed 's/"//g' > /tmp/image-names.txt
